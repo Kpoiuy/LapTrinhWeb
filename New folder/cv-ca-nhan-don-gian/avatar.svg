@@ -1,0 +1,17 @@
+<svg width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="75" cy="75" r="75" fill="#3498db"/>
+  
+  <!-- Head -->
+  <circle cx="75" cy="60" r="25" fill="#ecf0f1"/>
+  
+  <!-- Body -->
+  <ellipse cx="75" cy="115" rx="35" ry="40" fill="#ecf0f1"/>
+  
+  <!-- Eyes -->
+  <circle cx="65" cy="55" r="3" fill="#2c3e50"/>
+  <circle cx="85" cy="55" r="3" fill="#2c3e50"/>
+  
+  <!-- Smile -->
+  <path d="M 60 65 Q 75 75 90 65" stroke="#2c3e50" stroke-width="2" fill="none"/>
+</svg>

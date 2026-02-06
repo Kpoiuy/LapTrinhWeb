@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    
+    <style>
+        @font-face {
+            font-family: 'Raleway';
+            src: url('../Fonts/Raleway-Regular.ttf') format('truetype');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Raleway';
+            src: url('../Fonts/Raleway-Bold.ttf') format('truetype');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Raleway';
+            src: url('../Fonts/Raleway-Light.ttf') format('truetype');
+            font-weight: 300;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Navbar */
+        .navbar {
+            padding: 20px 0;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .navbar-nav .nav-link {
+            color: #333;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #007bff;
+        }
+        
+        /* Slider Section */
+        .slider-section {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+        }
+        
+        .carousel-item {
+            height: 600px;
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .carousel-caption {
+            bottom: 50%;
+            transform: translateY(50%);
+        }
+        
+        .carousel-caption h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .about-section img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        /* Projects Section */
+        .projects-section {
+            padding: 80px 0;
+        }
+        
+        .project-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+        
+        .project-item img {
+            width: 100%;
+            transition: transform 0.3s;
+        }
+        
+        .project-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,123,255,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .project-item:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-overlay h4 {
+            color: #fff;
+            font-weight: 700;
+        }
+        
+        /* Testimonial Section */
+        .testimonial-section {
+            padding: 80px 0;
+            background: url('../images/bg_testimonial.png') center/cover;
+            position: relative;
+        }
+        
+        .testimonial-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+        }
+        
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .testimonial-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+        
+        /* Blog Section */
+        .blog-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .blog-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            margin-bottom: 30px;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .blog-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .blog-content {
+            padding: 20px;
+        }
+        
+        .blog-content h4 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #333;
+            color: #fff;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-logo {
+            height: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: #fff;
+            font-size: 20px;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="../images/logo.png" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Dự án</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonial">Đánh giá</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Liên hệ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Slider Section -->
+    <section id="home" class="slider-section" style="margin-top: 80px;">
+        <div id="mainCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#mainCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#mainCarousel" data-slide-to="1"></li>
+                <li data-target="#mainCarousel" data-slide-to="2"></li>
+                <li data-target="#mainCarousel" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../images/Slider_1.png" alt="Slide 1">
+                    <div class="carousel-caption">
+                        <h1>Chào mừng đến với Portfolio</h1>
+                        <p>Khám phá các dự án sáng tạo của chúng tôi</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="../images/Slider_2.png" alt="Slide 2">
+                    <div class="carousel-caption">
+                        <h1>Thiết kế chuyên nghiệp</h1>
+                        <p>Giải pháp tối ưu cho doanh nghiệp</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="../images/Slider_3.png" alt="Slide 3">
+                    <div class="carousel-caption">
+                        <h1>Công nghệ hiện đại</h1>
+                        <p>Ứng dụng công nghệ mới nhất</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="../images/Slider_4.png" alt="Slide 4">
+                    <div class="carousel-caption">
+                        <h1>Đội ngũ chuyên nghiệp</h1>
+                        <p>Cam kết chất lượng hàng đầu</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#mainCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#mainCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </section>
+
+    
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="../images/img_about.png" alt="About Us">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="section-title">Về chúng tôi</h2>
+                    <p>Chúng tôi là đội ngũ chuyên nghiệp với nhiều năm kinh nghiệm trong lĩnh vực thiết kế và phát triển web. Sứ mệnh của chúng tôi là mang đến những giải pháp công nghệ tốt nhất cho khách hàng.</p>
+                    <p>Với đội ngũ sáng tạo và tận tâm, chúng tôi cam kết cung cấp các sản phẩm chất lượng cao, đáp ứng mọi nhu cầu của doanh nghiệp trong thời đại số.</p>
+                    <button class="btn btn-primary mt-3">Tìm hiểu thêm</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title text-center">Dự án của chúng tôi</h2>
+            <p class="text-center mb-5">Khám phá các dự án tiêu biểu mà chúng tôi đã thực hiện</p>
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="project-item">
+                        <img src="../images/img_project_1.png" alt="Project 1">
+                        <div class="project-overlay">
+                            <h4>Dự án 1</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="project-item">
+                        <img src="../images/img_project_2.png" alt="Project 2">
+                        <div class="project-overlay">
+                            <h4>Dự án 2</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="project-item">
+                        <img src="../images/img_project_3.png" alt="Project 3">
+                        <div class="project-overlay">
+                            <h4>Dự án 3</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="project-item">
+                        <img src="../images/img_project_4.png" alt="Project 4">
+                        <div class="project-overlay">
+                            <h4>Dự án 4</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="project-item">
+                        <img src="../images/img_project_5.png" alt="Project 5">
+                        <div class="project-overlay">
+                            <h4>Dự án 5</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="project-item">
+                        <img src="../images/img_project_6.png" alt="Project 6">
+                        <div class="project-overlay">
+                            <h4>Dự án 6</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="project-item">
+                        <img src="../images/img_project_7.png" alt="Project 7">
+                        <div class="project-overlay">
+                            <h4>Dự án 7</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="project-item">
+                        <img src="../images/img_project_8.png" alt="Project 8">
+                        <div class="project-overlay">
+                            <h4>Dự án 8</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonial Section -->
+    <section id="testimonial" class="testimonial-section">
+        <div class="container">
+            <div class="testimonial-content">
+                <img src="../images/img_testimonial.png" alt="Client" class="testimonial-img">
+                <h3>Khách hàng nói gì về chúng tôi</h3>
+                <p class="lead mt-4">"Đội ngũ rất chuyên nghiệp và tận tâm. Sản phẩm được giao đúng hạn và vượt quá mong đợi của chúng tôi. Chúng tôi rất hài lòng với dịch vụ và chắc chắn sẽ hợp tác lâu dài."</p>
+                <h5 class="mt-4">Nguyễn Văn A</h5>
+                <p>Giám đốc Công ty ABC</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Blog Section -->
+    <section id="blog" class="blog-section">
+        <div class="container">
+            <h2 class="section-title text-center">Blog & Tin tức</h2>
+            <p class="text-center mb-5">Cập nhật những tin tức mới nhất từ chúng tôi</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="blog-card">
+                        <img src="../images/blog_1.png" alt="Blog 1">
+                        <div class="blog-content">
+                            <h4>Xu hướng thiết kế web 2024</h4>
+                            <p class="text-muted"><i class="fa fa-calendar"></i> 15/01/2024</p>
+                            <p>Khám phá những xu hướng thiết kế web mới nhất trong năm 2024 và cách áp dụng chúng vào dự án của bạn.</p>
+                            <a href="#" class="btn btn-outline-primary">Đọc thêm</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="blog-card">
+                        <img src="../images/blog_2.png" alt="Blog 2">
+                        <div class="blog-content">
+                            <h4>Tối ưu hiệu suất website</h4>
+                            <p class="text-muted"><i class="fa fa-calendar"></i> 20/01/2024</p>
+                            <p>Hướng dẫn chi tiết về cách tối ưu hóa hiệu suất website để mang lại trải nghiệm tốt nhất cho người dùng.</p>
+                            <a href="#" class="btn btn-outline-primary">Đọc thêm</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="blog-card">
+                        <img src="../images/blog_3.png" alt="Blog 3">
+                        <div class="blog-content">
+                            <h4>SEO cho website hiện đại</h4>
+                            <p class="text-muted"><i class="fa fa-calendar"></i> 25/01/2024</p>
+                            <p>Những kỹ thuật SEO hiệu quả giúp website của bạn đạt thứ hạng cao trên công cụ tìm kiếm.</p>
+                            <a href="#" class="btn btn-outline-primary">Đọc thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Liên hệ với chúng tôi</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" placeholder="Họ và tên">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Tiêu đề">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="5" placeholder="Nội dung"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Gửi tin nhắn</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="../images/logo_bottom.png" alt="Logo" class="footer-logo">
+                    <p>Chúng tôi cung cấp giải pháp thiết kế và phát triển web chuyên nghiệp cho doanh nghiệp.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liên kết nhanh</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home" class="text-white">Trang chủ</a></li>
+                        <li><a href="#about" class="text-white">Giới thiệu</a></li>
+                        <li><a href="#projects" class="text-white">Dự án</a></li>
+                        <li><a href="#blog" class="text-white">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Theo dõi chúng tôi</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center">
+                <p>&copy; 2024 Portfolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- jQuery -->
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <!-- Popper.js -->
+    <script src="../js/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="../js/bootstrap.min.js"></script>
+    
+    <script>
+        // Smooth scrolling
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            var target = $(this.getAttribute('href'));
+            if(target.length) {
+                $('html, body').stop().animate({
+                    scrollTop: target.offset().top - 80
+                }, 1000);
+            }
+        });
+        
+        // Navbar background on scroll
+        $(window).scroll(function() {
+            if($(this).scrollTop() > 50) {
+                $('.navbar').addClass('shadow-sm');
+            } else {
+                $('.navbar').removeClass('shadow-sm');
+            }
+        });
+    </script>
+</body>
+</html>

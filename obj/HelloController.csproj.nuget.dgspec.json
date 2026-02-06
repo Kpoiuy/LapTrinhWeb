@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\New folder (4)\\HelloController.csproj": {}
+    "D:\\BT3\\HelloController.csproj": {}
   },
   "projects": {
-    "D:\\New folder (4)\\HelloController.csproj": {
+    "D:\\BT3\\HelloController.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\New folder (4)\\HelloController.csproj",
+        "projectUniqueName": "D:\\BT3\\HelloController.csproj",
         "projectName": "HelloController",
-        "projectPath": "D:\\New folder (4)\\HelloController.csproj",
+        "projectPath": "D:\\BT3\\HelloController.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\New folder (4)\\obj\\",
+        "outputPath": "D:\\BT3\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"

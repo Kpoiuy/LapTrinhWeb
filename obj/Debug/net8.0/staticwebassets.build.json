@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Hfv290ih2sI4wxdWhKXnPopQ+1/qC+ZwRLFqgLqlN+g=",
+  "Hash": "PhaIQeeyvKRL+QWpkJLxFB8hwQmARkj+ZClEHaX/QcQ=",
   "Source": "HelloController",
   "BasePath": "_content/HelloController",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "HelloController\\wwwroot",
       "Source": "HelloController",
-      "ContentRoot": "D:\\New folder (4)\\wwwroot\\",
+      "ContentRoot": "D:\\BT3\\wwwroot\\",
       "BasePath": "_content/HelloController",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\New folder (4)\\wwwroot\\css\\site.css",
+      "Identity": "D:\\BT3\\wwwroot\\css\\site.css",
       "SourceId": "HelloController",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\New folder (4)\\wwwroot\\",
+      "ContentRoot": "D:\\BT3\\wwwroot\\",
       "BasePath": "_content/HelloController",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
