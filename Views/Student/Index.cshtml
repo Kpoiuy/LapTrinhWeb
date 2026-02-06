@@ -1,0 +1,44 @@
+@model Models.StudentViewModel
+
+@{
+    ViewData["Title"] = "Đăng ký chuyên ngành";
+    Layout = "_Layout";
+}
+
+<h2>Đăng ký chuyên ngành</h2>
+
+<div class="info-card">
+    <form method="post" action="/Student/ShowKQ">
+        <div class="form-group">
+            <label for="MSSV">MSSV:</label>
+            <input type="text" id="MSSV" name="MSSV" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="HoTen">Họ tên:</label>
+            <input type="text" id="HoTen" name="HoTen" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="DiemTB">Điểm TB:</label>
+            <input type="number" id="DiemTB" name="DiemTB" class="form-control" step="0.1" min="0" max="10" required />
+        </div>
+
+        <div class="form-group">
+            <label for="ChuyenNganh">Chuyên ngành:</label>
+            <select id="ChuyenNganh" name="ChuyenNganh" class="form-control" required>
+                <option value="">-- Chọn chuyên ngành --</option>
+                <option value="CNPM">CNPM - Công nghệ phần mềm</option>
+                <option value="HTTT">HTTT - Hệ thống thông tin</option>
+                <option value="ANM">ANM - An ninh mạng</option>
+                <option value="TTNT">TTNT - Trí tuệ nhân tạo</option>
+                <option value="MMT">MMT - Mạng máy tính</option>
+            </select>
+        </div>
+
+        <div class="nav-links">
+            <button type="submit" class="btn">Đăng ký</button>
+            <a href="/" class="btn">Trang Chủ</a>
+        </div>
+    </form>
+</div>

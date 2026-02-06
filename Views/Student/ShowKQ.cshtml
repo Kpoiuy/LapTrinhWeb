@@ -1,0 +1,26 @@
+@model Models.StudentViewModel
+
+@{
+    ViewData["Title"] = "Kết quả đăng ký";
+    Layout = "_Layout";
+}
+
+<h2>Kết quả đăng ký</h2>
+
+<div class="success-message">
+    <h3 style="color: #00b894; margin-bottom: 15px;">✓ Đăng ký thành công!</h3>
+    
+    <p style="font-size: 1.1em; line-height: 1.8; color: #2d3436;">
+        Cảm ơn bạn <strong style="color: #0984e3;">@Model.MSSV</strong> - <strong style="color: #0984e3;">@Model.HoTen</strong> đã đăng ký chuyên ngành <strong style="color: #0984e3;">@Model.ChuyenNganh</strong>
+    </p>
+    
+    <p style="margin-top: 15px; font-size: 1.1em; color: #2d3436;">
+        Số lượng sinh viên đã đăng ký ngành giống bạn là: <strong style="color: #00b894;">@ViewBag.SoLuong sinh viên</strong>
+    </p>
+</div>
+
+<div class="nav-links">
+    <a href="/Student/Index" class="btn">Quay lại trang đăng ký</a>
+    <a href="/Hello" class="btn">Trang Hello</a>
+    <a href="/" class="btn">Trang Chủ</a>
+</div>

@@ -1,0 +1,26 @@
+@model Models.SanPhamViewModel
+
+@{
+    ViewData["Title"] = "Bài tập 2";
+    Layout = "_Layout";
+}
+
+<h2>Thông tin sản phẩm</h2>
+
+<div class="info-card">
+    <div class="info-item">
+        <strong>Tên sản phẩm:</strong> @Model.TenSanPham
+    </div>
+    <div class="info-item">
+        <strong>Giá bán:</strong> @Model.GiaBan.ToString("N0") VNĐ
+    </div>
+    <div class="info-item">
+        <strong>Ảnh mô tả:</strong>
+    </div>
+    <img src="@Model.AnhMoTa" alt="@Model.TenSanPham" class="product-image" />
+</div>
+
+<div class="nav-links">
+    <a href="/Hello" class="btn">Quay lại Hello</a>
+    <a href="/" class="btn">Trang Chủ</a>
+</div>
