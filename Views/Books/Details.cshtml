@@ -1,0 +1,72 @@
+@model BookDB.Models.Book
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<div class="container mt-4">
+    <h2>Book Details</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Model.ImageUrl" class="img-fluid" alt="@Model.Title">
+            }
+            else
+            {
+                <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 400px;">
+                    No Image Available
+                </div>
+            }
+        </div>
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-3">Title</dt>
+                <dd class="col-sm-9">@Model.Title</dd>
+
+                <dt class="col-sm-3">Author</dt>
+                <dd class="col-sm-9">@Model.Author</dd>
+
+                <dt class="col-sm-3">Year</dt>
+                <dd class="col-sm-9">@Model.Year</dd>
+
+                <dt class="col-sm-3">Publisher</dt>
+                <dd class="col-sm-9">@Model.Publisher</dd>
+
+                <dt class="col-sm-3">Category</dt>
+                <dd class="col-sm-9">
+                    <a asp-controller="Books" asp-action="Index" asp-route-categoryId="@Model.CategoryId">
+                        @Model.Category?.Name
+                    </a>
+                </dd>
+
+                @if (Model.Price.HasValue)
+                {
+                    <dt class="col-sm-3">Price</dt>
+                    <dd class="col-sm-9">@Model.Price.Value.ToString("N0") VND</dd>
+                }
+
+                @if (Model.Rating.HasValue)
+                {
+                    <dt class="col-sm-3">Rating</dt>
+                    <dd class="col-sm-9">@Model.Rating.Value / 5 ⭐</dd>
+                }
+            </dl>
+
+            <div class="btn-group" role="group">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+                <form asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+                <a asp-action="Order" asp-route-id="@Model.Id" class="btn btn-primary">Order</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

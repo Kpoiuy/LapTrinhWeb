@@ -1,0 +1,92 @@
+@model BookDB.ViewModels.BookListViewModel
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Book List</h2>
+        <a asp-action="Create" class="btn btn-primary">Add New Book</a>
+    </div>
+
+    @if (Model.SelectedCategoryId.HasValue)
+    {
+        <div class="alert alert-info">
+            Filtered by category: <strong>@Model.SelectedCategoryName</strong>
+            <a asp-action="Index" class="btn btn-sm btn-secondary ms-2">Clear Filter</a>
+        </div>
+    }
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+
+    <div class="row">
+        @foreach (var book in Model.Books)
+        {
+            <div class="col-md-12 mb-3">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-md-2">
+                            @if (!string.IsNullOrEmpty(book.ImageUrl))
+                            {
+                                <img src="@book.ImageUrl" class="img-fluid rounded-start" alt="@book.Title" style="height: 200px; object-fit: cover;">
+                            }
+                            else
+                            {
+                                <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
+                                    No Image
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card-body">
+                                <h5 class="card-title">@book.Title</h5>
+                                <p class="card-text"><strong>Author:</strong> @book.Author</p>
+                                <p class="card-text"><strong>Category:</strong> @book.Category?.Name</p>
+                                @if (book.Price.HasValue)
+                                {
+                                    <p class="card-text"><strong>Price:</strong> @book.Price.Value.ToString("N0") VND</p>
+                                }
+                                @if (book.Rating.HasValue)
+                                {
+                                    <p class="card-text"><strong>Rating:</strong> @book.Rating.Value / 5</p>
+                                }
+                                <div class="btn-group" role="group">
+                                    <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-sm btn-info">Details</a>
+                                    <a asp-action="Edit" asp-route-id="@book.Id" class="btn btn-sm btn-warning">Edit</a>
+                                    <form asp-controller="Cart" asp-action="AddToCart" asp-route-id="@book.Id" method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-success">Add to Cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (Model.TotalPages > 1)
+    {
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(Model.CurrentPage - 1)" asp-route-categoryId="@Model.SelectedCategoryId">Previous</a>
+                </li>
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-categoryId="@Model.SelectedCategoryId">@i</a>
+                    </li>
+                }
+                <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(Model.CurrentPage + 1)" asp-route-categoryId="@Model.SelectedCategoryId">Next</a>
+                </li>
+            </ul>
+            <p class="text-center">Page @Model.CurrentPage of @Model.TotalPages</p>
+        </nav>
+    }
+</div>
