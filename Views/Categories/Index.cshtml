@@ -1,0 +1,80 @@
+@model List<BookDB.ViewModels.CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Danh mục sách";
+}
+
+<div class="container mt-4">
+    <h2>Danh mục sách</h2>
+    <hr />
+
+    <div class="row">
+        @foreach (var category in Model)
+        {
+            <div class="col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4>
+                            <a asp-action="FilterByCategory" asp-route-categoryId="@category.Id" class="text-white text-decoration-none">
+                                @category.Name
+                            </a>
+                            <span class="badge bg-light text-dark float-end">@category.BookCount sách</span>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        @if (category.SampleBooks.Any())
+                        {
+                            <h5>Sách mẫu:</h5>
+                            <div class="row">
+                                @foreach (var book in category.SampleBooks)
+                                {
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            @if (!string.IsNullOrEmpty(book.ImageUrl))
+                                            {
+                                                <img src="@book.ImageUrl" class="card-img-top" alt="@book.Title" style="height: 200px; object-fit: cover;">
+                                            }
+                                            else
+                                            {
+                                                <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
+                                                    Không có ảnh
+                                                </div>
+                                            }
+                                            <div class="card-body">
+                                                <h6 class="card-title">@book.Title</h6>
+                                                <p class="card-text"><small>@book.Author</small></p>
+                                                @if (book.Price.HasValue)
+                                                {
+                                                    <p class="card-text"><strong>@book.Price.Value.ToString("N0") VND</strong></p>
+                                                }
+                                                <div class="d-grid gap-2">
+                                                    <a asp-controller="Books" asp-action="Details" asp-route-id="@book.Id" class="btn btn-sm btn-info">Xem chi tiết</a>
+                                                    <form asp-controller="Cart" asp-action="AddToCart" asp-route-id="@book.Id" method="post">
+                                                        <button type="submit" class="btn btn-sm btn-success w-100">Thêm vào giỏ</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="text-center mt-3">
+                                <a asp-action="FilterByCategory" asp-route-categoryId="@category.Id" class="btn btn-primary">
+                                    Xem tất cả sách @category.Name
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="text-muted">Chưa có sách trong danh mục này.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="mt-3">
+        <a asp-controller="Books" asp-action="Index" class="btn btn-secondary">Xem tất cả sách</a>
+    </div>
+</div>
