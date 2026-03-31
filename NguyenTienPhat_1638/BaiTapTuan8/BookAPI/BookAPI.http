@@ -1,0 +1,13 @@
+﻿@BookAPI_HostAddress = http://localhost:9999
+
+### Search books
+GET {{BookAPI_HostAddress}}/api/books?keyword=asp
+Accept: application/json
+
+### Add category
+POST {{BookAPI_HostAddress}}/api/categories
+Content-Type: application/json
+
+{
+  "name": "Security"
+}

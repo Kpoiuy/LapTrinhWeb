@@ -1,0 +1,58 @@
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+
+<section class="auth-shell">
+    <div class="auth-grid">
+        <article class="auth-promo">
+            <p class="page-kicker mb-2">CÂU 3</p>
+            <h2>Tạo tài khoản sinh viên</h2>
+            <p>Đăng ký sẽ lưu dữ liệu vào <code>AspNetUsers</code> và gán vai trò mặc định <code>STUDENT</code>.</p>
+            <p class="mb-0">Sau khi đăng ký thành công, hệ thống tự đăng nhập và chuyển đến <code>/home</code>.</p>
+        </article>
+
+        <article class="surface-card auth-card">
+            <h1 class="h4 mb-3">Đăng ký</h1>
+
+            <form asp-controller="Account" asp-action="Register" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Username" class="form-label"></label>
+                    <input asp-for="Username" class="form-control form-control-lg" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control form-control-lg" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control form-control-lg" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ConfirmPassword" class="form-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control form-control-lg" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-main w-100">Tạo tài khoản</button>
+            </form>
+
+            <p class="google-note mt-3 mb-0">
+                Đã có tài khoản?
+                <a asp-controller="Account" asp-action="Login">Đăng nhập tại đây</a>.
+            </p>
+        </article>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

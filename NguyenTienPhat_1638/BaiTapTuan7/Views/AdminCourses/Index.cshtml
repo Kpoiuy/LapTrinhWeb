@@ -1,0 +1,50 @@
+@model IEnumerable<Course>
+@{
+    ViewData["Title"] = "Quản trị - Học phần";
+}
+
+<section class="page-hero">
+    <p class="page-kicker">CÂU 2</p>
+    <h1>Quản lý học phần</h1>
+    <p class="page-subtitle">Thêm, sửa, xóa học phần. Chỉ tài khoản <code>ADMIN</code> mới được truy cập.</p>
+    <div class="hero-meta">
+        <span class="hero-pill">Tổng học phần: @Model.Count()</span>
+    </div>
+</section>
+
+<section class="panel-card">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+        <h2 class="panel-title mb-0">Bảng học phần</h2>
+        <a asp-controller="AdminCourses" asp-action="Create" class="btn btn-main">Thêm học phần</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-borderless app-table mb-0">
+            <thead>
+                <tr>
+                    <th>Tên học phần</th>
+                    <th>Số tín chỉ</th>
+                    <th>Giảng viên</th>
+                    <th>Danh mục</th>
+                    <th class="text-end">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model)
+                {
+                    <tr>
+                        <td>@course.Name</td>
+                        <td>@course.Credits</td>
+                        <td>@course.Lecturer</td>
+                        <td>@course.Category?.Name</td>
+                        <td>
+                            <div class="actions-group">
+                                <a asp-controller="AdminCourses" asp-action="Edit" asp-route-id="@course.Id" class="btn btn-outline-primary btn-sm">Sửa</a>
+                                <a asp-controller="AdminCourses" asp-action="Delete" asp-route-id="@course.Id" class="btn btn-outline-danger btn-sm">Xóa</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

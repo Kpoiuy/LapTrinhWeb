@@ -1,0 +1,79 @@
+@model List<Book>
+@{
+    ViewData["Title"] = "Books";
+    var categories = ViewBag.Categories as List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> ?? new();
+    var keyword = ViewBag.Keyword as string;
+    int? selectedCategory = ViewBag.CategoryId as int?;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Quản lý Books (CSHTML)</h3>
+    <a class="btn btn-primary" asp-action="Create">Thêm mới</a>
+</div>
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-4">
+        <input class="form-control" name="keyword" value="@keyword" placeholder="Từ khóa..." />
+    </div>
+    <div class="col-md-4">
+        <select class="form-select" name="categoryId">
+            <option value="">-- Tất cả category --</option>
+            @foreach (var c in categories)
+            {
+                if (selectedCategory.HasValue && selectedCategory.Value.ToString() == c.Value)
+                {
+                    <option value="@c.Value" selected>@c.Text</option>
+                }
+                else
+                {
+                    <option value="@c.Value">@c.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-md-4 d-flex gap-2">
+        <button class="btn btn-success" type="submit">Search</button>
+        <a class="btn btn-secondary" asp-action="Index">Reset</a>
+    </div>
+</form>
+
+<table class="table table-bordered table-hover align-middle">
+    <thead class="table-light">
+    <tr>
+        <th>ID</th>
+        <th>Ảnh</th>
+        <th>Tên sách</th>
+        <th>Tác giả</th>
+        <th>Năm</th>
+        <th>NXB</th>
+        <th>Category</th>
+        <th>Giá</th>
+        <th style="width:280px;">Thao tác</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var b in Model)
+    {
+        <tr>
+            <td>@b.Id</td>
+            <td>
+                @if (!string.IsNullOrWhiteSpace(b.ImagePath))
+                {
+                    <img src="@b.ImagePath" style="width:56px;height:72px;object-fit:cover;" />
+                }
+            </td>
+            <td>@b.Title</td>
+            <td>@b.Author</td>
+            <td>@b.Year</td>
+            <td>@b.Publisher</td>
+            <td>@b.Category?.Name</td>
+            <td>@b.Price.ToString("N0")</td>
+            <td class="d-flex gap-1">
+                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@b.Id">Chi tiết</a>
+                <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@b.Id">Sửa</a>
+                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@b.Id">Xóa</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

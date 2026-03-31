@@ -1,0 +1,64 @@
+@model AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Bảng điều khiển quản trị";
+}
+
+<section class="page-hero">
+    <p class="page-kicker">KHU VỰC QUẢN TRỊ</p>
+    <h1>Bảng điều khiển</h1>
+    <p class="page-subtitle">Quản lý học phần, theo dõi đăng ký và kiểm soát hệ thống tại một nơi.</p>
+</section>
+
+<section class="row g-3 mb-4">
+    <div class="col-12 col-md-4">
+        <article class="metric-card">
+            <p>Tổng học phần</p>
+            <h2>@Model.TotalCourses</h2>
+        </article>
+    </div>
+    <div class="col-12 col-md-4">
+        <article class="metric-card">
+            <p>Tổng danh mục</p>
+            <h2>@Model.TotalCategories</h2>
+        </article>
+    </div>
+    <div class="col-12 col-md-4">
+        <article class="metric-card">
+            <p>Tổng lượt đăng ký</p>
+            <h2>@Model.TotalEnrollments</h2>
+        </article>
+    </div>
+</section>
+
+<section class="panel-card">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3">
+        <h3 class="panel-title mb-0">Học phần đăng ký nhiều nhất</h3>
+        <a asp-controller="AdminCourses" asp-action="Index" class="btn btn-accent">Quản lý học phần</a>
+    </div>
+    @if (Model.TopCourses.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-borderless app-table mb-0">
+                <thead>
+                    <tr>
+                        <th>Học phần</th>
+                        <th class="text-end">Số lượt đăng ký</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.TopCourses)
+                    {
+                        <tr>
+                            <td>@item.CourseName</td>
+                            <td class="text-end fw-semibold">@item.Enrollments</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">Chưa có dữ liệu đăng ký.</div>
+    }
+</section>

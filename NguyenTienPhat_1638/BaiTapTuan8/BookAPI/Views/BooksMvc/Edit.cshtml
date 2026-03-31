@@ -1,0 +1,64 @@
+@model BookFormViewModel
+@{
+    ViewData["Title"] = "Sửa Book";
+}
+
+<h3 class="mb-3">Sửa Book</h3>
+<form asp-action="Edit" method="post" enctype="multipart/form-data" class="row g-3">
+    @Html.AntiForgeryToken()
+    <input asp-for="Id" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="col-md-6">
+        <label asp-for="Title" class="form-label">Tên sách</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Author" class="form-label">Tác giả</label>
+        <input asp-for="Author" class="form-control" />
+        <span asp-validation-for="Author" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Year" class="form-label">Năm</label>
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Publisher" class="form-label">Nhà xuất bản</label>
+        <input asp-for="Publisher" class="form-control" />
+        <span asp-validation-for="Publisher" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Price" class="form-label">Giá</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="CategoryId" class="form-label">Category</label>
+        <select asp-for="CategoryId" asp-items="Model.Categories" class="form-select"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="ImageFile" class="form-label">Ảnh mới (.jpg/.png)</label>
+        <input asp-for="ImageFile" type="file" accept=".jpg,.jpeg,.png" class="form-control" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.CurrentImagePath))
+    {
+        <div class="col-12">
+            <div>Ảnh hiện tại:</div>
+            <img src="@Model.CurrentImagePath" style="width:120px;height:160px;object-fit:cover;border:1px solid #ddd;" />
+        </div>
+    }
+
+    <div class="col-12 d-flex gap-2">
+        <button class="btn btn-primary" type="submit">Cập nhật</button>
+        <a class="btn btn-secondary" asp-action="Index">Quay lại</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

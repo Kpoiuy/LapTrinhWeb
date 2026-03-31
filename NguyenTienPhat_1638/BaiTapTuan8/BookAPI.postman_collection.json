@@ -1,0 +1,213 @@
+{
+  "info": {
+    "_postman_id": "9f462f97-f0ce-4788-a5a8-0d1bc48de001",
+    "name": "BaiTapTuan8-BookAPI-Full",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9999/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Root",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9999/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": [""]
+        }
+      }
+    },
+    {
+      "name": "Books - Search",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9999/api/books?keyword=asp&categoryId=1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": ["api", "books"],
+          "query": [
+            { "key": "keyword", "value": "asp" },
+            { "key": "categoryId", "value": "1" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Books - Add",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "title", "value": "Clean Architecture", "type": "text" },
+            { "key": "author", "value": "Robert C. Martin", "type": "text" },
+            { "key": "year", "value": "2017", "type": "text" },
+            { "key": "publisher", "value": "Prentice Hall", "type": "text" },
+            { "key": "price", "value": "450000", "type": "text" },
+            { "key": "categoryId", "value": "1", "type": "text" },
+            { "key": "imageFile", "type": "file", "src": "" }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:9999/api/books",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": ["api", "books"]
+        }
+      }
+    },
+    {
+      "name": "Books - Update",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "title", "value": "Clean Architecture (Updated)", "type": "text" },
+            { "key": "author", "value": "Robert C. Martin", "type": "text" },
+            { "key": "year", "value": "2018", "type": "text" },
+            { "key": "publisher", "value": "Prentice Hall", "type": "text" },
+            { "key": "price", "value": "480000", "type": "text" },
+            { "key": "categoryId", "value": "1", "type": "text" }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:9999/api/books/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": ["api", "books", "1"]
+        }
+      }
+    },
+    {
+      "name": "Books - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9999/api/books/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": ["api", "books", "1"]
+        }
+      }
+    },
+    {
+      "name": "Categories - Search",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9999/api/categories?keyword=pro",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": ["api", "categories"],
+          "query": [{ "key": "keyword", "value": "pro" }]
+        }
+      }
+    },
+    {
+      "name": "Categories - Add",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Cloud\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:9999/api/categories",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": ["api", "categories"]
+        }
+      }
+    },
+    {
+      "name": "Categories - Update",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Cloud Native\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:9999/api/categories/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": ["api", "categories", "1"]
+        }
+      }
+    },
+    {
+      "name": "Categories - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9999/api/categories/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": ["api", "categories", "1"]
+        }
+      }
+    },
+    {
+      "name": "Image - JPG",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9999/Content/ImageBooks/book-1.jpg",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": ["Content", "ImageBooks", "book-1.jpg"]
+        }
+      }
+    },
+    {
+      "name": "Image - PNG",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9999/Content/ImageBooks/book-3.png",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "9999",
+          "path": ["Content", "ImageBooks", "book-3.png"]
+        }
+      }
+    }
+  ]
+}

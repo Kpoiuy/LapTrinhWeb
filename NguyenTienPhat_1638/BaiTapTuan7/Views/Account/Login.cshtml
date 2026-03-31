@@ -1,0 +1,67 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+
+<section class="auth-shell">
+    <div class="auth-grid">
+        <article class="auth-promo">
+            <p class="page-kicker mb-2">CÂU 5 + CÂU 9</p>
+            <h2>Chào mừng quay lại</h2>
+            <p>Đăng nhập để tiếp tục đăng ký học phần và xem danh sách môn đã đăng ký.</p>
+            <p class="mb-1 fw-bold">Tài khoản mẫu</p>
+            <p class="mb-1">Quản trị: <code>admin01</code> / <code>Admin@123</code></p>
+            <p class="mb-0">Sinh viên: <code>student01</code> / <code>Student@123</code></p>
+        </article>
+
+        <article class="surface-card auth-card">
+            <h1 class="h4 mb-3">Đăng nhập</h1>
+            <form asp-controller="Account" asp-action="Login" method="post">
+                <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Username" class="form-label"></label>
+                    <input asp-for="Username" class="form-control form-control-lg" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control form-control-lg" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input asp-for="RememberMe" class="form-check-input" />
+                    <label asp-for="RememberMe" class="form-check-label"></label>
+                </div>
+
+                <button type="submit" class="btn btn-main w-100">Đăng nhập</button>
+            </form>
+
+            <hr class="my-4" />
+
+            @if (Model.GoogleLoginEnabled)
+            {
+                <form asp-controller="Account" asp-action="ExternalLogin" method="post" class="mb-2">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="provider" value="Google" />
+                    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                    <button type="submit" class="btn btn-outline-danger w-100">Đăng nhập bằng Google</button>
+                </form>
+            }
+            else
+            {
+                <button type="button" class="btn btn-outline-secondary w-100" disabled>Google OAuth chưa được cấu hình</button>
+                <p class="google-note mt-2 mb-0">
+                    Cần cấu hình đủ <code>Authentication:Google:ClientId</code> và <code>ClientSecret</code> trong appsettings để bật Câu 9.
+                </p>
+            }
+        </article>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

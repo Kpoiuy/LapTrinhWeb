@@ -1,0 +1,24 @@
+@model CategoryFormViewModel
+@{
+    ViewData["Title"] = "Sửa Category";
+}
+
+<h3 class="mb-3">Sửa Category</h3>
+<form asp-action="Edit" method="post" class="row g-3">
+    @Html.AntiForgeryToken()
+    <input asp-for="Id" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-md-6">
+        <label asp-for="Name" class="form-label">Tên category</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="col-12 d-flex gap-2">
+        <button class="btn btn-primary" type="submit">Cập nhật</button>
+        <a class="btn btn-secondary" asp-action="Index">Quay lại</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

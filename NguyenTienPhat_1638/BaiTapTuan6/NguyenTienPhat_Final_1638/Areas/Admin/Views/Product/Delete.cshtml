@@ -1,0 +1,71 @@
+@model NguyenTienPhat_Final_1638.Models.Product
+
+@{
+    ViewData["Title"] = "Xác nhận xóa";
+    var orderItemCount = ViewBag.OrderItemCount != null ? (int)ViewBag.OrderItemCount : 0;
+}
+
+<div class="card border-danger">
+    <div class="card-header bg-danger text-white">
+        <h4 class="mb-0"><i class="bi bi-exclamation-triangle"></i> CẢNH BÁO XÓA</h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger">
+            <strong>Bạn có chắc chắn muốn xóa sản phẩm này không?</strong>
+        </div>
+
+        @if (orderItemCount > 0)
+        {
+            <div class="alert alert-warning">
+                Sản phẩm này đang xuất hiện trong @orderItemCount dòng chi tiết đơn hàng nên hệ thống sẽ không cho phép xóa.
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-3 text-center">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded shadow-sm">
+                }
+                else
+                {
+                    <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 150px;">
+                        <i class="bi bi-image" style="font-size: 3rem; color: #ccc;"></i>
+                    </div>
+                }
+            </div>
+            <div class="col-md-9">
+                <table class="table table-borderless">
+                    <tr>
+                        <th width="150">Tên sản phẩm:</th>
+                        <td><strong>"@Model.Name"</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Mô tả:</th>
+                        <td>@(string.IsNullOrWhiteSpace(Model.Description) ? "Chưa có mô tả" : Model.Description)</td>
+                    </tr>
+                    <tr>
+                        <th>Giá:</th>
+                        <td><strong class="text-danger">@Model.Price.ToString("N0") đ</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Danh mục:</th>
+                        <td><span class="badge bg-info">@Model.Category?.Name</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <form asp-action="Delete" method="post" class="mt-4">
+            <input type="hidden" asp-for="Id" />
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-danger" disabled="@(orderItemCount > 0)">
+                    <i class="bi bi-trash"></i> Vâng, xóa ngay!
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-success">
+                    <i class="bi bi-arrow-left"></i> Hủy bỏ
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

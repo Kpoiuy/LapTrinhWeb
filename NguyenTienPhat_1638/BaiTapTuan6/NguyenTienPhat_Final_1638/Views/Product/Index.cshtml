@@ -1,0 +1,88 @@
+﻿@model IEnumerable<NguyenTienPhat_Final_1638.Models.Product>
+
+@{
+    ViewData["Title"] = "Sản phẩm";
+}
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Danh mục</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="@Url.Action("Index")" class="list-group-item list-group-item-action @(ViewBag.SelectedCategoryId == null ? "active" : "")">
+                        Tất cả sản phẩm
+                    </a>
+                    @if (ViewBag.Categories != null)
+                    {
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <a href="@Url.Action("Index", new { categoryId = category.Id })" 
+                               class="list-group-item list-group-item-action @(ViewBag.SelectedCategoryId == category.Id ? "active" : "")">
+                                @category.Name
+                            </a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <h2 class="mb-4">Danh sách sản phẩm</h2>
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info">
+                    Không có sản phẩm nào.
+                </div>
+            }
+            else
+            {
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    @foreach (var product in Model)
+                    {
+                        <div class="col">
+                            <div class="card h-100 shadow-sm">
+                                @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                {
+                                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" style="height: 200px; object-fit: cover;">
+                                }
+                                else
+                                {
+                                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+                                        <i class="bi bi-image text-white" style="font-size: 3rem;"></i>
+                                    </div>
+                                }
+                                <div class="card-body">
+                                    <h5 class="card-title">@product.Name</h5>
+                                    <p class="card-text text-muted small">@product.Category?.Name</p>
+                                    <p class="card-text">@product.Description</p>
+                                    <h4 class="text-primary">@product.Price.ToString("N0") đ</h4>
+                                </div>
+                                <div class="card-footer bg-transparent">
+                                    <div class="d-grid gap-2">
+                                        <a href="@Url.Action("Details", new { id = product.Id })" class="btn btn-outline-primary">
+                                            <i class="bi bi-eye"></i> Xem chi tiết
+                                        </a>
+                                        @if (User.Identity?.IsAuthenticated == true && !User.IsInRole("Admin"))
+                                        {
+                                            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-inline">
+                                                <input type="hidden" name="productId" value="@product.Id" />
+                                                <input type="hidden" name="quantity" value="1" />
+                                                <button type="submit" class="btn btn-primary w-100">
+                                                    <i class="bi bi-cart-plus"></i> Thêm vào giỏ
+                                                </button>
+                                            </form>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

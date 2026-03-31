@@ -1,0 +1,16 @@
+﻿@model BaiTap1.Models.User
+
+@{
+    ViewData["Title"] = "Đăng ký thành công";
+}
+
+<div class="exercise-card">
+    <div class="exercise-top"></div>
+    <h1 class="exercise-title">BÀI TẬP VẬN DỤNG 1</h1>
+
+    <div class="result-box">
+        <h2>Đăng ký thành công</h2>
+        <p>Chào <strong>@Model.Username</strong>, tài khoản đã được tạo hợp lệ.</p>
+        <a asp-action="Index" class="btn-primary">Quay lại</a>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿@model List<BaiTap2.Models.Todo>
+
+@{
+    ViewData["Title"] = "Danh sách công việc";
+}
+
+<div class="exercise-card">
+    <div class="exercise-top"></div>
+    <h1 class="exercise-title">BÀI TẬP VẬN DỤNG 2</h1>
+    <p class="exercise-subtitle">Xây dựng ứng dụng TodoList với các chức năng: Xem danh sách, chi tiết, thêm, sửa, xóa</p>
+
+    <div class="content">
+        <h2 class="section-title">DANH SÁCH CÔNG VIỆC</h2>
+
+        <a asp-action="Create" class="add-link">Tạo mới công việc</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã công việc</th>
+                    <th>Tên công việc</th>
+                    <th>Trạng thái hoàn thành</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="4">Chưa có công việc nào</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var todo in Model)
+                    {
+                        <tr>
+                            <td>@todo.Id</td>
+                            <td>@todo.Title</td>
+                            <td>
+                                @if (todo.Completed)
+                                {
+                                    <input type="checkbox" checked disabled />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" disabled />
+                                }
+                            </td>
+                            <td class="actions">
+                                <a asp-action="Edit" asp-route-id="@todo.Id">Sửa</a> |
+                                <a asp-action="Details" asp-route-id="@todo.Id">Chi tiết</a> |
+                                <a asp-action="Delete" asp-route-id="@todo.Id">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

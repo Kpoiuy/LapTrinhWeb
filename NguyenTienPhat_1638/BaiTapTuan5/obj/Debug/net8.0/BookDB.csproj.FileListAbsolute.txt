@@ -1,0 +1,10 @@
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan6\obj\Debug\net8.0\BookDB.csproj.AssemblyReference.cache
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan6\obj\Debug\net8.0\rpswa.dswa.cache.json
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan6\obj\Debug\net8.0\BookDB.GeneratedMSBuildEditorConfig.editorconfig
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan6\obj\Debug\net8.0\BookDB.AssemblyInfoInputs.cache
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan6\obj\Debug\net8.0\BookDB.AssemblyInfo.cs
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan6\obj\Debug\net8.0\BookDB.csproj.CoreCompileInputs.cache
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan6\obj\Debug\net8.0\BookDB.MvcApplicationPartsAssemblyInfo.cache
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan6\obj\Debug\net8.0\BookDB.RazorAssemblyInfo.cache
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan6\obj\Debug\net8.0\BookDB.RazorAssemblyInfo.cs
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan6\obj\Debug\net8.0\BookDB.sourcelink.json

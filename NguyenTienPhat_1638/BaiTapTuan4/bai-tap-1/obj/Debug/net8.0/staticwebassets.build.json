@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "olhRgSL3Ck4ZyZJrb2mX9fOzwop3yIlY2R+9fcczcFI=",
+  "Source": "BaiTap1",
+  "BasePath": "_content/BaiTap1",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "BaiTap1\\wwwroot",
+      "Source": "BaiTap1",
+      "ContentRoot": "D:\\New folder (2)\\LapTrinhWeb\\NguyenTienPhat_1638\\BaiTapTuan4\\bai-tap-1\\wwwroot\\",
+      "BasePath": "_content/BaiTap1",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\New folder (2)\\LapTrinhWeb\\NguyenTienPhat_1638\\BaiTapTuan4\\bai-tap-1\\wwwroot\\css\\site.css",
+      "SourceId": "BaiTap1",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\New folder (2)\\LapTrinhWeb\\NguyenTienPhat_1638\\BaiTapTuan4\\bai-tap-1\\wwwroot\\",
+      "BasePath": "_content/BaiTap1",
+      "RelativePath": "css/site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    }
+  ]
+}

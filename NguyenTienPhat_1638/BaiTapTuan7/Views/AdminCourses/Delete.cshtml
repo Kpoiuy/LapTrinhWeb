@@ -1,0 +1,32 @@
+@model Course
+@{
+    ViewData["Title"] = "Xóa học phần";
+}
+
+<section class="page-hero">
+    <p class="page-kicker">XÓA HỌC PHẦN</p>
+    <h1>Xóa học phần</h1>
+    <p class="page-subtitle">Thao tác này sẽ xóa vĩnh viễn học phần và toàn bộ đăng ký liên quan.</p>
+</section>
+
+<section class="panel-card border border-danger">
+    <p class="mb-3 text-danger fw-semibold">Vui lòng xác nhận xóa học phần sau:</p>
+    <dl class="row mb-3">
+        <dt class="col-sm-3">Tên học phần</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+        <dt class="col-sm-3">Số tín chỉ</dt>
+        <dd class="col-sm-9">@Model.Credits</dd>
+        <dt class="col-sm-3">Giảng viên</dt>
+        <dd class="col-sm-9">@Model.Lecturer</dd>
+        <dt class="col-sm-3">Danh mục</dt>
+        <dd class="col-sm-9">@Model.Category?.Name</dd>
+    </dl>
+
+    <div class="d-flex gap-2">
+        <form asp-controller="AdminCourses" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger">Xóa vĩnh viễn</button>
+        </form>
+        <a asp-controller="AdminCourses" asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+    </div>
+</section>

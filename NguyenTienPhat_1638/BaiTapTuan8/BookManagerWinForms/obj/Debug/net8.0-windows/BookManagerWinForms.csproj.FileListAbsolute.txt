@@ -1,0 +1,15 @@
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\bin\Debug\net8.0-windows\BookManagerWinForms.exe
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\bin\Debug\net8.0-windows\BookManagerWinForms.deps.json
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\bin\Debug\net8.0-windows\BookManagerWinForms.runtimeconfig.json
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\bin\Debug\net8.0-windows\BookManagerWinForms.dll
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\bin\Debug\net8.0-windows\BookManagerWinForms.pdb
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\obj\Debug\net8.0-windows\BookManagerWinForms.GeneratedMSBuildEditorConfig.editorconfig
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\obj\Debug\net8.0-windows\BookManagerWinForms.AssemblyInfoInputs.cache
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\obj\Debug\net8.0-windows\BookManagerWinForms.AssemblyInfo.cs
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\obj\Debug\net8.0-windows\BookManagerWinForms.csproj.CoreCompileInputs.cache
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\obj\Debug\net8.0-windows\BookManagerWinForms.sourcelink.json
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\obj\Debug\net8.0-windows\BookManagerWinForms.dll
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\obj\Debug\net8.0-windows\refint\BookManagerWinForms.dll
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\obj\Debug\net8.0-windows\BookManagerWinForms.pdb
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\obj\Debug\net8.0-windows\BookManagerWinForms.genruntimeconfig.cache
+D:\New folder (2)\LapTrinhWeb\NguyenTienPhat_1638\BaiTapTuan8\BookManagerWinForms\obj\Debug\net8.0-windows\ref\BookManagerWinForms.dll

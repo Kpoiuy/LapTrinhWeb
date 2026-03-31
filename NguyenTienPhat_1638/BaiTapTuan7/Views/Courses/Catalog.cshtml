@@ -1,0 +1,99 @@
+@model CourseListViewModel
+@{
+    ViewData["Title"] = "Danh sách học phần";
+}
+
+<section class="page-hero">
+    <p class="page-kicker">CÂU 4 + CÂU 8</p>
+    <h1>Danh mục học phần công khai</h1>
+    <p class="page-subtitle">Đường dẫn <code>/courses</code> cho phép mọi người truy cập. Sinh viên có thể đăng ký trực tiếp từ danh sách này.</p>
+    <div class="hero-meta">
+        <span class="hero-pill">Có @Model.TotalItems học phần</span>
+        <span class="hero-pill">Trang hiện tại: @Model.CurrentPage</span>
+    </div>
+</section>
+
+<section class="surface-card search-card">
+    <form method="get" asp-controller="Courses" asp-action="Index" class="row g-2">
+        <div class="col-12 col-md-10">
+            <input name="keyword" value="@Model.Keyword" class="form-control form-control-lg" placeholder="Tìm theo tên học phần..." />
+        </div>
+        <div class="col-12 col-md-2 d-grid">
+            <button type="submit" class="btn btn-main">Tìm kiếm</button>
+        </div>
+    </form>
+</section>
+
+<section class="row g-3">
+    @foreach (var course in Model.Courses)
+    {
+        <article class="col-12 col-md-6 col-xl-4">
+            <div class="catalog-card">
+                <div class="course-image-wrap">
+                    <img src="@course.Image"
+                         class="course-image"
+                         alt="@course.Name"
+                         onerror="this.onerror=null;this.src='@Url.Content("~/images/course-default.svg")';" />
+                    <span class="category-chip">@course.CategoryName</span>
+                </div>
+                <div class="catalog-body">
+                    <h3 class="catalog-title">@course.Name</h3>
+                    <p class="catalog-meta">Số tín chỉ: @course.Credits</p>
+                    <p class="catalog-meta">Giảng viên: @course.Lecturer</p>
+
+                    <div class="catalog-actions">
+                        @if (User.IsInRole(RoleNames.Student))
+                        {
+                            @if (course.IsEnrolled)
+                            {
+                                    <form asp-controller="Enroll" asp-action="Cancel" asp-route-courseId="@course.Id" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                    <button type="submit" class="btn btn-outline-danger w-100">Hủy đăng ký</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form asp-controller="Enroll" asp-action="Enroll" asp-route-courseId="@course.Id" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                    <button type="submit" class="btn btn-accent w-100">Đăng ký học phần</button>
+                                </form>
+                            }
+                        }
+                        else if (User.Identity?.IsAuthenticated != true)
+                        {
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary w-100">Đăng nhập để đăng ký</a>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-outline-secondary w-100" disabled>Chỉ STUDENT được đăng ký</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </article>
+    }
+</section>
+
+@if (!Model.Courses.Any())
+{
+    <div class="empty-state mt-3">Không tìm thấy học phần phù hợp với từ khóa.</div>
+}
+
+<nav aria-label="Phân trang học phần" class="mt-4">
+    <ul class="pagination justify-content-center flex-wrap">
+        <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : string.Empty)">
+            <a class="page-link" asp-controller="Courses" asp-action="Index" asp-route-page="@(Model.CurrentPage - 1)" asp-route-keyword="@Model.Keyword">Trước</a>
+        </li>
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : string.Empty)">
+                <a class="page-link" asp-controller="Courses" asp-action="Index" asp-route-page="@i" asp-route-keyword="@Model.Keyword">@i</a>
+            </li>
+        }
+        <li class="page-item @(Model.CurrentPage >= Model.TotalPages ? "disabled" : string.Empty)">
+            <a class="page-link" asp-controller="Courses" asp-action="Index" asp-route-page="@(Model.CurrentPage + 1)" asp-route-keyword="@Model.Keyword">Sau</a>
+        </li>
+    </ul>
+</nav>

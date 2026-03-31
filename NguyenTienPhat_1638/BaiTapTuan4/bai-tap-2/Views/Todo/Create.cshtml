@@ -1,0 +1,41 @@
+﻿@model BaiTap2.Models.Todo
+
+@{
+    ViewData["Title"] = "Thêm mới công việc";
+}
+
+<div class="exercise-card">
+    <div class="exercise-top"></div>
+    <h1 class="exercise-title">BÀI TẬP VẬN DỤNG 2</h1>
+    <p class="exercise-subtitle">Xây dựng ứng dụng TodoList với các chức năng: Xem danh sách, chi tiết, thêm, sửa, xóa</p>
+
+    <div class="form-box">
+        <h2 class="section-title">Thêm mới công việc</h2>
+
+        <form asp-action="Create" method="post" novalidate>
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="validation"></div>
+
+            <div class="field">
+                <label asp-for="Id" class="label"></label>
+                <input asp-for="Id" class="input" />
+                <span asp-validation-for="Id" class="validation"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Title" class="label"></label>
+                <input asp-for="Title" class="input" />
+                <span asp-validation-for="Title" class="validation"></span>
+            </div>
+
+            <div class="field inline-check">
+                <input asp-for="Completed" />
+                <label asp-for="Completed"></label>
+            </div>
+
+            <button type="submit" class="btn-primary">Tạo mới</button>
+            <br />
+            <a asp-action="Index" class="back-link">Quay trở lại</a>
+        </form>
+    </div>
+</div>

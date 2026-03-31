@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Course image">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f4cdd" />
+      <stop offset="100%" stop-color="#12b3a8" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)" />
+  <g fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2">
+    <circle cx="150" cy="120" r="80" />
+    <circle cx="1030" cy="520" r="120" />
+    <path d="M0 430 Q300 360 560 430 T1200 430" />
+  </g>
+  <g fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">
+    <text x="600" y="300" font-size="54" font-weight="700">HOC PHAN</text>
+    <text x="600" y="360" font-size="28" opacity="0.9">Course Registration</text>
+  </g>
+</svg>

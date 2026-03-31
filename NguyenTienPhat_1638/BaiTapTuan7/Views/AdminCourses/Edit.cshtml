@@ -1,0 +1,105 @@
+@model Course
+@{
+    ViewData["Title"] = "Cập nhật học phần";
+}
+
+<section class="page-hero">
+    <p class="page-kicker">CẬP NHẬT HỌC PHẦN</p>
+    <h1>Sửa thông tin học phần</h1>
+    <p class="page-subtitle">Cập nhật dữ liệu để danh mục học phần luôn chính xác.</p>
+</section>
+
+<form asp-controller="AdminCourses" asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data" class="panel-card row g-3">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="col-12">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control form-control-lg" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Credits" class="form-label"></label>
+        <input asp-for="Credits" class="form-control form-control-lg" />
+        <span asp-validation-for="Credits" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Lecturer" class="form-label"></label>
+        <input asp-for="Lecturer" class="form-control form-control-lg" />
+        <span asp-validation-for="Lecturer" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Image" class="form-label"></label>
+        <input asp-for="Image" class="form-control form-control-lg" placeholder="Ví dụ: https://... hoặc D:\Anh\monhoc.jpg hoặc /images/ten-anh.svg" />
+        <small class="text-muted">Hỗ trợ URL ảnh trực tiếp, data URI base64 hoặc đường dẫn file local trên máy chủ. Link ngoài sẽ được hệ thống tải về <code>wwwroot/images/uploads</code> để hiển thị ổn định.</small>
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label class="form-label" for="uploadedImage">Upload ảnh trực tiếp</label>
+        <div class="drop-upload-zone" id="dropZone">
+            <p class="drop-upload-title">Kéo thả ảnh vào đây hoặc bấm để chọn file</p>
+            <p class="drop-upload-hint">Hỗ trợ: JPG, PNG, WEBP, GIF, BMP, SVG (tối đa 8MB). Nếu có file thì sẽ ưu tiên file thay cho đường dẫn ảnh.</p>
+            <input type="file"
+                   id="uploadedImage"
+                   name="uploadedImage"
+                   class="form-control"
+                   accept=".jpg,.jpeg,.png,.webp,.gif,.bmp,.svg,image/*" />
+            <p class="drop-upload-file-name mb-0 mt-2" id="uploadedFileName">Chưa chọn file ảnh.</p>
+        </div>
+    </div>
+    <div class="col-12">
+        <label asp-for="CategoryId" class="form-label"></label>
+        <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-select form-select-lg">
+            <option value="">-- Chọn danh mục --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-main">Cập nhật</button>
+        <a asp-controller="AdminCourses" asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (() => {
+            const dropZone = document.getElementById("dropZone");
+            const fileInput = document.getElementById("uploadedImage");
+            const fileNameLabel = document.getElementById("uploadedFileName");
+            if (!dropZone || !fileInput || !fileNameLabel) return;
+
+            const updateFileName = () => {
+                const file = fileInput.files && fileInput.files.length > 0 ? fileInput.files[0] : null;
+                fileNameLabel.textContent = file ? `Đã chọn: ${file.name}` : "Chưa chọn file ảnh.";
+            };
+
+            ["dragenter", "dragover"].forEach((eventName) => {
+                dropZone.addEventListener(eventName, (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    dropZone.classList.add("drag-over");
+                });
+            });
+
+            ["dragleave", "drop"].forEach((eventName) => {
+                dropZone.addEventListener(eventName, (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    dropZone.classList.remove("drag-over");
+                });
+            });
+
+            dropZone.addEventListener("drop", (event) => {
+                const files = event.dataTransfer?.files;
+                if (!files || files.length === 0) return;
+                const transfer = new DataTransfer();
+                transfer.items.add(files[0]);
+                fileInput.files = transfer.files;
+                updateFileName();
+            });
+
+            fileInput.addEventListener("change", updateFileName);
+            dropZone.addEventListener("click", () => fileInput.click());
+        })();
+    </script>
+}

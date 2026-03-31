@@ -1,0 +1,27 @@
+﻿@model BaiTap2.Models.Todo
+
+@{
+    ViewData["Title"] = "Chi tiết công việc";
+}
+
+<div class="exercise-card">
+    <div class="exercise-top"></div>
+    <h1 class="exercise-title">BÀI TẬP VẬN DỤNG 2</h1>
+    <p class="exercise-subtitle">Xây dựng ứng dụng TodoList với các chức năng: Xem danh sách, chi tiết, thêm, sửa, xóa</p>
+
+    <div class="content">
+        <h2 class="section-title">Chi tiết công việc</h2>
+
+        <div class="detail-box">
+            <strong>Mã công việc:</strong> @Model.Id
+        </div>
+        <div class="detail-box">
+            <strong>Tên công việc:</strong> @Model.Title
+        </div>
+        <div class="detail-box">
+            <strong>Trạng thái hoàn thành:</strong> @(Model.Completed ? "Đã hoàn thành" : "Chưa hoàn thành")
+        </div>
+
+        <a asp-action="Index" class="back-link">Quay trở lại</a>
+    </div>
+</div>

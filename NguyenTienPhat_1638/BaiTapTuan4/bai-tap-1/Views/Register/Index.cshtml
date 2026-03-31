@@ -1,0 +1,42 @@
+﻿@model BaiTap1.Models.User
+
+@{
+    ViewData["Title"] = "Bài tập vận dụng 1";
+}
+
+<div class="exercise-card">
+    <div class="exercise-top"></div>
+    <h1 class="exercise-title">BÀI TẬP VẬN DỤNG 1</h1>
+    <p class="exercise-subtitle">Xây dựng Form đăng ký người dùng</p>
+
+    <div class="form-box">
+        <h2>Đăng ký tài khoản</h2>
+
+        <form asp-action="Index" method="post" novalidate>
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="validation"></div>
+
+            <div class="field">
+                <input asp-for="Username" class="input" placeholder="Tên đăng nhập" />
+                <span asp-validation-for="Username" class="validation"></span>
+            </div>
+
+            <div class="field">
+                <input asp-for="Email" class="input" placeholder="Địa chỉ Email" />
+                <span asp-validation-for="Email" class="validation"></span>
+            </div>
+
+            <div class="field">
+                <input asp-for="Password" class="input" placeholder="Mật khẩu" />
+                <span asp-validation-for="Password" class="validation"></span>
+            </div>
+
+            <div class="field">
+                <input asp-for="ConfirmPassword" class="input" placeholder="Xác thực mật khẩu" />
+                <span asp-validation-for="ConfirmPassword" class="validation"></span>
+            </div>
+
+            <button type="submit" class="btn-primary">Đăng ký</button>
+        </form>
+    </div>
+</div>

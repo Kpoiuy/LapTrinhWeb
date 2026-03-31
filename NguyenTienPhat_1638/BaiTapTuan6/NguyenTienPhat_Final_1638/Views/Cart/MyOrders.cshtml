@@ -1,0 +1,59 @@
+@model IEnumerable<NguyenTienPhat_Final_1638.Models.Order>
+
+@{
+    ViewData["Title"] = "Đơn hàng của tôi";
+}
+
+<div class="container my-5">
+    <h2 class="mb-4">Đơn hàng của tôi</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> Bạn chưa có đơn hàng nào. <a href="@Url.Action("Index", "Product")">Mua sắm ngay</a>
+        </div>
+    }
+    else
+    {
+        @foreach (var order in Model)
+        {
+            <div class="card mb-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>Đơn hàng #@order.Id</strong>
+                        <span class="text-muted ms-2">@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</span>
+                    </div>
+                    <span class="badge 
+                        @(order.Status == "Pending" ? "bg-warning" : 
+                          order.Status == "Processing" ? "bg-info" : 
+                          order.Status == "Shipped" ? "bg-primary" : 
+                          order.Status == "Delivered" ? "bg-success" : "bg-danger")">
+                        @order.Status
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h6>Sản phẩm:</h6>
+                            <ul class="list-unstyled">
+                                @foreach (var item in order.OrderItems)
+                                {
+                                    <li class="mb-2">
+                                        <i class="bi bi-box"></i> @item.Product?.Name x @item.Quantity - @((item.Price * item.Quantity).ToString("N0")) đ
+                                    </li>
+                                }
+                            </ul>
+                            <p class="mb-0"><strong>Địa chỉ giao hàng:</strong> @order.ShippingAddress</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <h5 class="text-primary mb-3">@order.TotalAmount.ToString("N0") đ</h5>
+                            <a href="@Url.Action("OrderConfirmation", new { orderId = order.Id })" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-eye"></i> Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

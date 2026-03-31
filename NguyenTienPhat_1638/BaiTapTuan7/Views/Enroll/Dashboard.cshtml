@@ -1,0 +1,59 @@
+@model MyCoursesViewModel
+@{
+    ViewData["Title"] = "Học phần của tôi";
+}
+
+<section class="page-hero">
+    <p class="page-kicker">CÂU 6 + CÂU 7</p>
+    <h1>Danh sách học phần đã đăng ký</h1>
+    <p class="page-subtitle">Trang này chỉ hiển thị các học phần mà tài khoản STUDENT hiện tại đã đăng ký.</p>
+    <div class="hero-meta">
+        <span class="hero-pill">Tổng môn đã đăng ký: @Model.TotalCourses</span>
+        <span class="hero-pill">Tổng tín chỉ: @Model.TotalCredits</span>
+        @if (Model.LatestEnrollDate.HasValue)
+        {
+            <span class="hero-pill">Đăng ký gần nhất: @Model.LatestEnrollDate.Value.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</span>
+        }
+    </div>
+</section>
+
+@if (!Model.Enrollments.Any())
+{
+    <div class="empty-state">Bạn chưa đăng ký học phần nào.</div>
+}
+else
+{
+    <section class="panel-card">
+        <div class="table-responsive">
+            <table class="table table-borderless app-table mb-0">
+                <thead>
+                    <tr>
+                        <th>Tên học phần</th>
+                        <th>Số tín chỉ</th>
+                        <th>Giảng viên</th>
+                        <th>Ngày đăng ký</th>
+                        <th class="text-end">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var enrollment in Model.Enrollments)
+                    {
+                        <tr>
+                            <td>@enrollment.Course?.Name</td>
+                            <td>@enrollment.Course?.Credits</td>
+                            <td>@enrollment.Course?.Lecturer</td>
+                            <td>@enrollment.EnrollDate.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                            <td class="text-end">
+                                <form asp-controller="Enroll" asp-action="Cancel" asp-route-courseId="@enrollment.CourseId" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Hủy đăng ký</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+}
